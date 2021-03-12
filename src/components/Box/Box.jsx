@@ -12,11 +12,27 @@ const propsToOmit = [
 ];
 
 const Box = styled(omitProps('div', propsToOmit))`
-   box-sizing: border-box;
-   ${layout}
-   ${space}
-   ${flexbox}
-   ${position}
+  box-sizing: border-box;
+  ${layout}
+  ${space}
+  ${flexbox}
+  ${position}
+  background-color: #03B6BC;
+  border: 1.2rem solid #FFFA65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  width: 320px;
+  height: 400px;
+  margin: auto;
+  padding: 12px;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box
+  }
 `;
 
 export default Box;
