@@ -11,6 +11,20 @@ const useAaveContract = () => {
   const [ gotchis, setGotchis ] = useState();
   const [ selectedGotchi, setSelectedGotchi ] = useState();
 
+  const getAavegotchiSVG = async (tokenId, contract) => {
+    const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
+    return svg;
+  };
+
+  const getAllAavegotchiSVGs = async (gotchis, contract) => {
+    return Promise.all(gotchis.map(async gotchi => {
+      const svg = await getAavegotchiSVG(gotchi.tokenId, contract);
+      return {
+        ...gotchi,
+        svg,
+      }}))
+  }
+
   const loadBlockchainData = async() => {
     const provider = createMetaMaskProvider()
     const web3 = new Web3(provider);
@@ -22,6 +36,7 @@ const useAaveContract = () => {
     const gotchis = await aaveContract.methods.allAavegotchisOfOwner(accounts[0]).call();
     const updatedGotchis = gotchis.map((gotchi) => {
       const numericTraits = gotchi['modifiedNumericTraits'];
+
       return (
         {
           tokenId: parseInt(gotchi['tokenId']),
@@ -42,13 +57,10 @@ const useAaveContract = () => {
         }
       );
     });
-    setGotchis(updatedGotchis);
-    setSelectedGotchi(updatedGotchis[0]);
-  };
-
-  const getAavegotchiSVG = async (tokenId) => {
-    const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
-    return svg;
+  
+    const gotchisWithSVGs = await getAllAavegotchiSVGs(updatedGotchis, aaveContract);
+    setGotchis(gotchisWithSVGs);
+    setSelectedGotchi(gotchisWithSVGs[0]);
   };
 
   useEffect(() => {
@@ -60,7 +72,6 @@ const useAaveContract = () => {
     contract,
     gotchis,
     selectedGotchi,
-    getAavegotchiSVG,
   };
 };
 

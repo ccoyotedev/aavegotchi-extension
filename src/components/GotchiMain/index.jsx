@@ -45,7 +45,7 @@ const InfoButtonContainer = styled.div`
   top: 0;
 `
 
-export const GotchiMain = ({ selectedGotchi, gotchiSVG }) => {
+export const GotchiMain = ({ selectedGotchi }) => {
   return (
     <Container>
       <Header className="full-width">
@@ -59,7 +59,7 @@ export const GotchiMain = ({ selectedGotchi, gotchiSVG }) => {
           </InfoButtonContainer>
         </LevelContainer>
       </Header>
-      <Gotchi svgData={gotchiSVG} />
+      <Gotchi svgData={selectedGotchi?.svg} />
       <Button>Pet</Button>
     </Container>
   )

@@ -19,7 +19,6 @@ const App = () => {
 
   useEffect(() => {
     if (selectedGotchi) {
-      // const svg = getAavegotchiSVG(selectedGotchi.id);
       chrome.runtime.sendMessage({
         type: 'gotchi',
         data: {
