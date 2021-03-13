@@ -1,25 +1,14 @@
 import 'libs/polyfills';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import Box from 'components/Box';
 import defaultTheme from 'themes/default';
-import { GotchiMain } from 'components/GotchiMain';
+import App from './App';
 
 const Popup = () => {
-  const [ gotchi, setGotchi ] = useState();
-
-  useEffect(() => {
-    chrome.storage.local.get("gotchi", (res) => {
-      setGotchi(res.gotchi);
-    });
-  }, [])
-
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box width="200px">
-        <GotchiMain selectedGotchi={gotchi} />
-      </Box>
+      <App />
     </ThemeProvider>
   );
 };

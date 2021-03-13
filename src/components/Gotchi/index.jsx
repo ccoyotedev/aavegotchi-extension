@@ -7,7 +7,7 @@ const down = keyframes`
   }
 
   100% {
-    transform: translateY(2px);
+    transform: translateY(1.5px);
   }
 `;
 
@@ -17,13 +17,13 @@ const up = keyframes`
   }
 
   100% {
-    transform: translateY(2px);
+    transform: translateY(1.5px);
   }
 `;
 
 const GotchiContainer = styled.div`
-  width: 220px;
-  height: 220px;
+  width: 165px;
+  height: 165px;
 
   .gotchi-bg {
     display: none;

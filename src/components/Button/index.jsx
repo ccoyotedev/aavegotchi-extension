@@ -8,8 +8,8 @@ const ButtonWrapper = styled.div`
     content: '';
     background-color: black;
     position: absolute;
-    top: -4px;
-    bottom: -4px;
+    top: -3px;
+    bottom: -3px;
     width: 100%;
     left: 0;
   }
@@ -18,25 +18,26 @@ const ButtonWrapper = styled.div`
     content: '';
     background-color: black;
     position: absolute;
-    left: -4px;
-    right: -4px;
+    left: -3px;
+    right: -3px;
     height: 100%;
   }
 `
 
 const StyledButton = styled.button`
-  background-color: #7318F4;
+  background-color: ${({ theme }) => theme.palette.purple};
   color: white;
   display: grid;
   place-items: center;
-  font-size: 2rem;
+  font-size: 14px;
   position: relative;
   border: none;
   z-index: 1;
-  border-bottom: 0.6rem solid #4C1F7C;
-  border-right: 0.6rem solid #4C1F7C;
-  width: 12rem;
-  height: 4.4rem;
+  border-bottom: 4.5px solid ${({ theme }) => theme.palette.purpleAccent};
+  border-right: 4.5px solid ${({ theme }) => theme.palette.purpleAccent};
+  width: 90px;
+  height: 33px;
+  cursor: pointer;
 `
 
 export const Button = (props) => {

@@ -8,8 +8,8 @@ const ButtonWrapper = styled.div`
     content: '';
     background-color: black;
     position: absolute;
-    top: -4px;
-    bottom: -4px;
+    top: -3px;
+    bottom: -3px;
     width: 100%;
     left: 0;
   }
@@ -18,31 +18,32 @@ const ButtonWrapper = styled.div`
     content: '';
     background-color: black;
     position: absolute;
-    left: -4px;
-    right: -4px;
+    left: -3px;
+    right: -3px;
     height: 100%;
   }
 `
 
 const Button = styled.button`
-  height: 20px;
-  width: 20px;
-  font-size: 18px;
+  height: 15px;
+  width: 15px;
+  font-size: 14px;
   background-color: #FA34F2;
   color: white;
   display: grid;
   place-items: center;
-  font-size: 2rem;
   position: relative;
   border: none;
   z-index: 1;
+  cursor: pointer;
+  padding: 0;
 `
 
 export const IconButton = (props) => {
   return (
     <ButtonWrapper>
       <Button onClick={props.onClick}>
-        i
+        {props.icon}
       </Button>
     </ButtonWrapper>
   )

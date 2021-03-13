@@ -19,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     if (selectedGotchi) {
+      console.log(selectedGotchi);
       chrome.runtime.sendMessage({
         type: 'gotchi',
         data: {
