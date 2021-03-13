@@ -29,7 +29,6 @@ const StyledButton = styled.button`
   color: white;
   display: grid;
   place-items: center;
-  font-size: 14px;
   position: relative;
   border: none;
   z-index: 1;

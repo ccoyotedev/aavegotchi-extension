@@ -27,7 +27,6 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   height: 15px;
   width: 15px;
-  font-size: 14px;
   background-color: #FA34F2;
   color: white;
   display: grid;

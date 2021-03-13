@@ -32,8 +32,8 @@ const PanelHeader = styled.div`
   background-color: ${({ theme }) => theme.palette.purple};
 
   h2 {
-    font-size: 14px;
     margin: 0;
+    font-weight: normal;
   }
 `
 
@@ -53,7 +53,10 @@ const TraitRow = styled.div`
     color: black;
     text-transform: uppercase;
     margin: 0;
-    font-size: 10px;
+  }
+
+  .trait {
+    font-weight: bold;
   }
 `
 
@@ -73,27 +76,27 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
         </PanelHeader>
         <DetailsContent>
           <TraitRow>
-            <p className="trait">Energy</p>
+            <p className="trait">⚡️ Energy</p>
             <p className="trait-value">({gotchi?.numericTraits.energy})</p>
           </TraitRow>
           <TraitRow>
-            <p className="trait">Aggression</p>
+            <p className="trait">👹 Aggression</p>
             <p className="trait-value">({gotchi?.numericTraits.aggression})</p>
           </TraitRow>
           <TraitRow>
-            <p className="trait">Spookiness</p>
+            <p className="trait">👻 Spookiness</p>
             <p className="trait-value">({gotchi?.numericTraits.spookiness})</p>
           </TraitRow>
           <TraitRow>
-            <p className="trait">Brain Size</p>
+            <p className="trait">🧠 Brain Size</p>
             <p className="trait-value">({gotchi?.numericTraits.brainSize})</p>
           </TraitRow>
           <TraitRow>
-            <p className="trait">Eye Shape</p>
+            <p className="trait">👀 Eye Shape</p>
             <p className="trait-value">({gotchi?.numericTraits.eyeShape})</p>
           </TraitRow>
           <TraitRow>
-            <p className="trait">Eye Color</p>
+            <p className="trait">👁 Eye Color</p>
             <p className="trait-value">({gotchi?.numericTraits.eyeColor})</p>
           </TraitRow>
         </DetailsContent>

@@ -25,10 +25,7 @@ const NamePanel = styled.div`
 
   h1 {
     color: black;
-    text-transform: uppercase;
-    margin: 0;
     text-align: center;
-    font-size: 16px;
   }
 `
 
@@ -39,7 +36,6 @@ const LevelContainer = styled.div`
   width: 100%;
 
   h2 {
-    font-size: 12px;
     margin-bottom: 0;
   }
 `
