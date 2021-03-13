@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import useAaveContract from 'hooks/aaveContract';
 import { Gotchi } from '../Gotchi';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
@@ -46,8 +45,7 @@ const InfoButtonContainer = styled.div`
   top: 0;
 `
 
-export const GotchiMain = () => {
-  const { gotchiSVG, selectedGotchi } = useAaveContract();
+export const GotchiMain = ({ selectedGotchi, gotchiSVG }) => {
   return (
     <Container>
       <Header className="full-width">

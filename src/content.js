@@ -1,10 +1,7 @@
 import 'libs/polyfills';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider, StyleSheetManager } from 'styled-components';
-import Box from 'components/Box';
-import defaultTheme from 'themes/default';
-import { GotchiMain } from 'components/GotchiMain';
+import useAaveContract from 'hooks/aaveContract';
 
 const root = document.createElement('div');
 const shadow = root.attachShadow({ mode: 'open' });
@@ -18,18 +15,22 @@ shadow.appendChild(appContainer);
 document.body.appendChild(root);
 
 const App = () => {
+  const { selectedGotchi } = useAaveContract();
+
+  useEffect(() => {
+    if (selectedGotchi) {
+      // const svg = getAavegotchiSVG(selectedGotchi.id);
+      chrome.runtime.sendMessage({
+        type: 'gotchi',
+        data: {
+          ...selectedGotchi,
+        }
+      })
+    }
+  }, [selectedGotchi])
+
   return (
-    <StyleSheetManager target={styleContainer}>
-      <ThemeProvider theme={defaultTheme}>
-        <Box
-          position="fixed"
-          top={3}
-          right={3}
-        >
-          <GotchiMain />
-        </Box>
-      </ThemeProvider>
-    </StyleSheetManager>
+    <div />
   );
 };
 

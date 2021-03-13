@@ -9,7 +9,6 @@ const useAaveContract = () => {
   const [ account, setAccount ] = useState('');
   const [ contract, setContract ] = useState(null);
   const [ gotchis, setGotchis ] = useState();
-  const [ gotchiSVG, setGotchiSVG ] = useState();
   const [ selectedGotchi, setSelectedGotchi ] = useState();
 
   const loadBlockchainData = async() => {
@@ -47,16 +46,10 @@ const useAaveContract = () => {
     setSelectedGotchi(updatedGotchis[0]);
   };
 
-  useEffect(() => {
-    const setAavegotchiSVG = async (tokenId) => {
-      const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
-      setGotchiSVG(svg);
-    };
-
-    if (selectedGotchi) {
-      setAavegotchiSVG(selectedGotchi.tokenId);
-    }
-  }, [ selectedGotchi, contract ]);
+  const getAavegotchiSVG = async (tokenId) => {
+    const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
+    return svg;
+  };
 
   useEffect(() => {
     loadBlockchainData();
@@ -66,8 +59,8 @@ const useAaveContract = () => {
     account,
     contract,
     gotchis,
-    gotchiSVG,
     selectedGotchi,
+    getAavegotchiSVG,
   };
 };
 
