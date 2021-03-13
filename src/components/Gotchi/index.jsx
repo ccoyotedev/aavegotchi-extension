@@ -23,7 +23,8 @@ const up = keyframes`
 
 const GotchiContainer = styled.div`
   width: 165px;
-  height: 165px;
+  height: 150px;
+  margin-top: -14px;
 
   .gotchi-bg {
     display: none;

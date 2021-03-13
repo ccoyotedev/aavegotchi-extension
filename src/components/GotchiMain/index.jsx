@@ -29,14 +29,14 @@ const NamePanel = styled.div`
   }
 `
 
-const LevelContainer = styled.div`
+const KinshipContainer = styled.div`
   color: white;
   position: relative;
   text-align: center;
   width: 100%;
-
+  margin-top: 4px;
   h2 {
-    margin-bottom: 0;
+    font-weight: normal;
   }
 `
 
@@ -47,9 +47,10 @@ export const GotchiMain = ({ selectedGotchi }) => {
         <NamePanel className="yellow-panel full-width">
           <h1>{selectedGotchi?.name}</h1>
         </NamePanel>
-        <LevelContainer>
-          <h2>Level: {selectedGotchi?.level}</h2>
-        </LevelContainer>
+        <KinshipContainer>
+          <h2>KINSHIP: ({selectedGotchi?.kinship})</h2>
+          <p>Next Interaction: {selectedGotchi?.lastInteracted}</p>
+        </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />
       <Button>Pet</Button>
