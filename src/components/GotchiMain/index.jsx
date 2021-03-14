@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
+import { timeUntilNextInteraction } from 'utils/time';
 
 const Container = styled.div`
   width: 100%;
@@ -49,7 +50,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
         </NamePanel>
         <KinshipContainer>
           <h2>KINSHIP: ({selectedGotchi?.kinship})</h2>
-          <p>Next Interaction: {selectedGotchi?.lastInteracted}</p>
+          <p>Next Interaction: {timeUntilNextInteraction(selectedGotchi?.lastInteracted)}</p>
         </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />

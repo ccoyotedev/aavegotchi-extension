@@ -46,8 +46,8 @@ const TraitRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 12px;
+  align-items: baseline;
+  padding: 0 8px;
 
   p {
     color: black;
@@ -65,6 +65,15 @@ const PanelFooter = styled.div`
 `
 
 export const DetailsPanel = ({ gotchi, closePanel }) => {
+  const {
+    energy,
+    aggression,
+    spookiness,
+    brainSize,
+    eyeShape,
+    eyeColor,
+  } = gotchi?.numericTraits;
+
   return (
     <Wrapper>
       <CloseButtonContainer>
@@ -77,27 +86,27 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
         <DetailsContent>
           <TraitRow>
             <p className="trait">⚡️ Energy</p>
-            <p className="trait-value">({gotchi?.numericTraits.energy})</p>
+            <p className="trait-value">({energy})</p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👹 Aggression</p>
-            <p className="trait-value">({gotchi?.numericTraits.aggression})</p>
+            <p className="trait-value">({aggression})</p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👻 Spookiness</p>
-            <p className="trait-value">({gotchi?.numericTraits.spookiness})</p>
+            <p className="trait-value">({spookiness})</p>
           </TraitRow>
           <TraitRow>
             <p className="trait">🧠 Brain Size</p>
-            <p className="trait-value">({gotchi?.numericTraits.brainSize})</p>
+            <p className="trait-value">({brainSize})</p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👀 Eye Shape</p>
-            <p className="trait-value">({gotchi?.numericTraits.eyeShape})</p>
+            <p className="trait-value">({eyeShape})</p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👁 Eye Color</p>
-            <p className="trait-value">({gotchi?.numericTraits.eyeColor})</p>
+            <p className="trait-value">({eyeColor})</p>
           </TraitRow>
         </DetailsContent>
         <PanelFooter />
