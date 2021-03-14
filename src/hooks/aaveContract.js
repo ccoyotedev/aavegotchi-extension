@@ -25,6 +25,11 @@ const useAaveContract = () => {
       }}))
   }
 
+  const handlePet = async (tokenId) => {
+    const interact = await contract?.methods.interact(tokenId).send();
+    return interact;
+  }
+
   const loadBlockchainData = async() => {
     const provider = createMetaMaskProvider()
     const web3 = new Web3(provider);
@@ -72,6 +77,7 @@ const useAaveContract = () => {
     contract,
     gotchis,
     selectedGotchi,
+    handlePet,
   };
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
@@ -42,6 +42,27 @@ const KinshipContainer = styled.div`
 `
 
 export const GotchiMain = ({ selectedGotchi }) => {
+  const [ pending, setPending ] = useState(false);
+
+  const handlePet = () => {
+    setPending(response.pending);
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {
+          type: "pet",
+          data: {
+            tokenId: selectedGotchi.tokenId,
+          }
+        },
+        function(response) {
+          if (response.sucess) {
+            setPending(false);
+          }
+        });
+    });
+  }
+
   return (
     <Container>
       <Header className="full-width">
@@ -54,7 +75,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
         </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />
-      <Button>Pet</Button>
+      <Button onClick={handlePet}>{pending ? 'Petting' : 'Pet'}</Button>
     </Container>
   )
 }

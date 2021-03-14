@@ -15,17 +15,39 @@ shadow.appendChild(appContainer);
 document.body.appendChild(root);
 
 const App = () => {
-  const { selectedGotchi } = useAaveContract();
+  const { selectedGotchi, handlePet } = useAaveContract();
+
+  const sendHandlePet = async (tokenId) => {
+    const res = await handlePet(tokenId)
+    return res;
+  }
+
+  const listener = (message, sender, sendResponse) => {
+    switch(message.type) {
+      case "pet":
+        sendHandlePet(message.data.tokenId).then(() => {
+          sendResponse({ success: true });
+        })
+        break;
+      default:
+        console.error("Unrecognised message: ", message);
+    }
+  }
 
   useEffect(() => {
+    chrome.runtime.onMessage.addListener(listener);
+
     if (selectedGotchi) {
-      console.log(selectedGotchi);
       chrome.runtime.sendMessage({
         type: 'gotchi',
         data: {
           ...selectedGotchi,
         }
       })
+    }
+
+    return () => {
+      chrome.runtime.onMessage.removeListener(listener);
     }
   }, [selectedGotchi])
 
