@@ -19,6 +19,7 @@ const App = () => {
 
   const sendHandlePet = async (tokenId) => {
     const res = await handlePet(tokenId)
+    console.log(res);
     return res;
   }
 

@@ -45,7 +45,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
   const [ pending, setPending ] = useState(false);
 
   const handlePet = () => {
-    setPending(response.pending);
+    setPending(true);
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(
         tabs[0].id,
@@ -57,7 +57,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
         },
         function(response) {
           if (response.sucess) {
-            setPending(false);
+            setPending(response.pending);
           }
         });
     });
