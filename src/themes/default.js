@@ -9,5 +9,6 @@ export default {
     purpleAccent: '#4C1F7C',
     yellow: '#FFFA65',
     yellowAccent: '#E5DF40',
+    grey: '#B2B2B2',
   },
 };

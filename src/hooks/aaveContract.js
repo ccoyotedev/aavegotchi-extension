@@ -37,7 +37,7 @@ const useAaveContract = () => {
     const web3 = new Web3(provider);
     const accounts = await web3.eth.getAccounts();
     setAccount(accounts[0]);
-    console.log(accounts[0]);
+    console.log('account: ', accounts[0]);
     const aaveContract = new web3.eth.Contract(diamondAbi, aavegotchiAddress);
     setContract(aaveContract);
     const gotchis = await aaveContract.methods.allAavegotchisOfOwner(accounts[0]).call();

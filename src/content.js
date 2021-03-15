@@ -15,7 +15,7 @@ shadow.appendChild(appContainer);
 document.body.appendChild(root);
 
 const App = () => {
-  const { selectedGotchi, handlePet } = useAaveContract();
+  const { selectedGotchi, handlePet, account } = useAaveContract();
 
   const sendHandlePet = async (tokenId) => {
     const res = await handlePet(tokenId)
@@ -30,6 +30,10 @@ const App = () => {
           sendResponse({ success: true });
         })
         break;
+      case "connection":
+        console.log(window, window.ethereum);
+        sendResponse({ connected: !!account })
+        break;
       default:
         console.error("Unrecognised message: ", message);
     }
@@ -38,6 +42,12 @@ const App = () => {
   useEffect(() => {
     chrome.runtime.onMessage.addListener(listener);
 
+    return () => {
+      chrome.runtime.onMessage.removeListener(listener);
+    }
+  }, [account])
+
+  useEffect(() => {
     if (selectedGotchi) {
       chrome.runtime.sendMessage({
         type: 'gotchi',
@@ -45,10 +55,6 @@ const App = () => {
           ...selectedGotchi,
         }
       })
-    }
-
-    return () => {
-      chrome.runtime.onMessage.removeListener(listener);
     }
   }, [selectedGotchi])
 

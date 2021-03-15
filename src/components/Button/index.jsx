@@ -37,12 +37,18 @@ const StyledButton = styled.button`
   width: 90px;
   height: 33px;
   cursor: pointer;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.palette.grey};
+    border-bottom: 3px solid ${({ theme }) => theme.palette.pink};
+    border-right: 3px solid ${({ theme }) => theme.palette.pink};
+  }
 `
 
 export const Button = (props) => {
   return (
     <ButtonWrapper>
-      <StyledButton onClick={props.onClick}>
+      <StyledButton onClick={props.onClick} disabled={props.disabled}>
         {props.children}
       </StyledButton>
     </ButtonWrapper>

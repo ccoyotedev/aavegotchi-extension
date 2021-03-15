@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
@@ -43,6 +43,23 @@ const KinshipContainer = styled.div`
 
 export const GotchiMain = ({ selectedGotchi }) => {
   const [ pending, setPending ] = useState(false);
+  const [ isConnected, setIsConnected ] = useState(false);
+
+  useEffect(() => {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {
+          type: "connection",
+        },
+        function(response) {
+          console.log(response);
+          if (response) {
+            setIsConnected(response.connected);
+          }
+        });
+    });
+  }, []);
 
   const handlePet = () => {
     setPending(true);
@@ -56,11 +73,32 @@ export const GotchiMain = ({ selectedGotchi }) => {
           }
         },
         function(response) {
-          if (response.sucess) {
-            setPending(response.pending);
+          if (response.success) {
+            setPending(false);
           }
         });
     });
+  }
+
+  // const handleConnect = () => {
+  //   setPending(true);
+  //   chrome.runtime.sendMessage(
+  //     {
+  //       type: "connect",
+  //     },
+  //     (response) => {
+  //       alert(response.success);
+  //       if (response.success) {
+  //         setPending(false);
+  //         setIsConnected(true);
+  //       }
+  //     });
+  // }
+
+  const handleClick = () => {
+    if (isConnected) {
+      handlePet()
+    }
   }
 
   return (
@@ -71,11 +109,13 @@ export const GotchiMain = ({ selectedGotchi }) => {
         </NamePanel>
         <KinshipContainer>
           <h2>KINSHIP: ({selectedGotchi?.kinship})</h2>
-          <p>Next Interaction: {timeUntilNextInteraction(selectedGotchi?.lastInteracted)}</p>
+          <p>{timeUntilNextInteraction(selectedGotchi?.lastInteracted)}</p>
         </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />
-      <Button onClick={handlePet}>{pending ? 'Petting' : 'Pet'}</Button>
+      <Button onClick={handleClick} disabled={!isConnected || pending}>
+        Pet
+      </Button>
     </Container>
   )
 }
