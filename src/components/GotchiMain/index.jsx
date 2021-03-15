@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { IconButton } from 'components/IconButton';
 import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
 import { timeUntilNextInteraction } from 'utils/time';
+
+const InfoButtonContainer = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+`
+
+const PickGotchiContainer = styled.div`
+  position: absolute;
+  left: 5px;
+  top: 5px;
+`
 
 const Container = styled.div`
   width: 100%;
@@ -23,6 +36,7 @@ const NamePanel = styled.div`
   color: black;
   padding: 3px 24px;
   width: 100%;
+  position: relative;
 
   h1 {
     color: black;
@@ -41,7 +55,11 @@ const KinshipContainer = styled.div`
   }
 `
 
-export const GotchiMain = ({ selectedGotchi, connected }) => {
+export const GotchiMain = ({
+  selectedGotchi,
+  connected,
+  handleShowDetails,
+}) => {
   const [ pending, setPending ] = useState(false);
 
   const handlePet = () => {
@@ -88,7 +106,17 @@ export const GotchiMain = ({ selectedGotchi, connected }) => {
     <Container>
       <Header className="full-width">
         <NamePanel className="yellow-panel full-width">
+          <PickGotchiContainer>
+            <IconButton
+              onClick={handleShowDetails}
+              icon="v"
+              secondary
+            />
+          </PickGotchiContainer>
           <h1>{selectedGotchi?.name}</h1>
+          <InfoButtonContainer>
+            <IconButton onClick={handleShowDetails} icon="i" />
+          </InfoButtonContainer>
         </NamePanel>
         <KinshipContainer>
           <h2>KINSHIP: ({selectedGotchi?.kinship})</h2>

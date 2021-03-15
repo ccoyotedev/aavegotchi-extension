@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Box from 'components/Box';
-import { IconButton } from 'components/IconButton';
 import { GotchiMain } from 'components/GotchiMain';
 import { DetailsPanel } from 'components/DetailsPanel';
 import { EmptyState } from 'components/EmptyState';
-import styled from 'styled-components';
-
-const InfoButtonContainer = styled.div`
-  position: absolute;
-  right: 26px;
-  top: 26px;
-`
 
 export default () => {
   const [ gotchis, setGotchis ] = useState([]);
@@ -51,15 +43,14 @@ export default () => {
         return <EmptyState connected={isConnected} />
       case 'MAIN':
         return (
-          <>
-            <InfoButtonContainer>
-              <IconButton onClick={() => setView('DETAILS')} icon="i" />
-            </InfoButtonContainer>
-            <GotchiMain selectedGotchi={gotchis[0]} connected={isConnected} />
-          </>
+          <GotchiMain
+            selectedGotchi={gotchis[0]}
+            connected={isConnected}
+            handleShowDetails={() => setView('DETAILS')}
+          />
         )
       case 'DETAILS':
-        return <DetailsPanel gotchi={gotchi} closePanel={() => setView('MAIN')} />
+        return <DetailsPanel gotchi={gotchis[0]} closePanel={() => setView('MAIN')} />
       default:
         return <EmptyState connected={isConnected} />
     }

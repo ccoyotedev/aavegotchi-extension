@@ -6,7 +6,9 @@ const ButtonWrapper = styled.div`
 
   &:after {
     content: '';
-    background-color: black;
+    background-color: ${({ secondary, theme }) =>
+      secondary ? theme.palette.yellowAccent : 'black'
+    };
     position: absolute;
     top: -3px;
     bottom: -3px;
@@ -16,7 +18,9 @@ const ButtonWrapper = styled.div`
 
   &:before {
     content: '';
-    background-color: black;
+    background-color: ${({ secondary, theme }) =>
+      secondary ? theme.palette.yellowAccent : 'black'
+    };
     position: absolute;
     left: -3px;
     right: -3px;
@@ -27,8 +31,10 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   height: 15px;
   width: 15px;
-  background-color: #FA34F2;
-  color: white;
+  background-color: ${({ secondary, theme }) =>
+    secondary ? theme.palette.yellow : theme.palette.pink
+  };
+  color: ${({ secondary }) => secondary ? 'black' : 'white'};
   display: grid;
   place-items: center;
   position: relative;
@@ -40,8 +46,8 @@ const Button = styled.button`
 
 export const IconButton = (props) => {
   return (
-    <ButtonWrapper>
-      <Button onClick={props.onClick}>
+    <ButtonWrapper secondary={props.secondary}>
+      <Button onClick={props.onClick} secondary={props.secondary}>
         {props.icon}
       </Button>
     </ButtonWrapper>
