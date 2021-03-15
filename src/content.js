@@ -15,7 +15,7 @@ shadow.appendChild(appContainer);
 document.body.appendChild(root);
 
 const App = () => {
-  const { selectedGotchi, handlePet, account } = useAaveContract();
+  const { gotchis, handlePet, account } = useAaveContract();
 
   const sendHandlePet = async (tokenId) => {
     const res = await handlePet(tokenId)
@@ -31,7 +31,6 @@ const App = () => {
         })
         break;
       case "connection":
-        console.log(window, window.ethereum);
         sendResponse({ connected: !!account })
         break;
       default:
@@ -48,15 +47,15 @@ const App = () => {
   }, [account])
 
   useEffect(() => {
-    if (selectedGotchi) {
+    if (gotchis.length > 0) {
       chrome.runtime.sendMessage({
-        type: 'gotchi',
+        type: 'gotchis',
         data: {
-          ...selectedGotchi,
+          gotchis: gotchis,
         }
       })
     }
-  }, [selectedGotchi])
+  }, [gotchis])
 
   return (
     <div />

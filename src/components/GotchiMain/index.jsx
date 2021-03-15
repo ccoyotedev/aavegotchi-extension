@@ -41,25 +41,8 @@ const KinshipContainer = styled.div`
   }
 `
 
-export const GotchiMain = ({ selectedGotchi }) => {
+export const GotchiMain = ({ selectedGotchi, connected }) => {
   const [ pending, setPending ] = useState(false);
-  const [ isConnected, setIsConnected ] = useState(false);
-
-  useEffect(() => {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        {
-          type: "connection",
-        },
-        function(response) {
-          console.log(response);
-          if (response) {
-            setIsConnected(response.connected);
-          }
-        });
-    });
-  }, []);
 
   const handlePet = () => {
     setPending(true);
@@ -96,7 +79,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
   // }
 
   const handleClick = () => {
-    if (isConnected) {
+    if (connected) {
       handlePet()
     }
   }
@@ -113,7 +96,7 @@ export const GotchiMain = ({ selectedGotchi }) => {
         </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />
-      <Button onClick={handleClick} disabled={!isConnected || pending}>
+      <Button onClick={handleClick} disabled={!connected || pending}>
         Pet
       </Button>
     </Container>

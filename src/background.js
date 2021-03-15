@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((message) => {
   switch (message.type) {
-    case ('gotchi'):
-      chrome.storage.local.set({ gotchi: message.data });
+    case ('gotchis'):
+      chrome.storage.local.set({ gotchis: message.data.gotchis });
   }
 });

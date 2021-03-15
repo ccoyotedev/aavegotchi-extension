@@ -8,8 +8,7 @@ const aavegotchiAddress = '0x86935F11C86623deC8a25696E1C19a8659CbF95d';
 const useAaveContract = () => {
   const [ account, setAccount ] = useState('');
   const [ contract, setContract ] = useState(null);
-  const [ gotchis, setGotchis ] = useState();
-  const [ selectedGotchi, setSelectedGotchi ] = useState();
+  const [ gotchis, setGotchis ] = useState([]);
 
   const getAavegotchiSVG = async (tokenId, contract) => {
     const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
@@ -67,7 +66,6 @@ const useAaveContract = () => {
   
     const gotchisWithSVGs = await getAllAavegotchiSVGs(updatedGotchis, aaveContract);
     setGotchis(gotchisWithSVGs);
-    setSelectedGotchi(gotchisWithSVGs[0]);
   };
 
   useEffect(() => {
@@ -78,7 +76,6 @@ const useAaveContract = () => {
     account,
     contract,
     gotchis,
-    selectedGotchi,
     handlePet,
   };
 };
