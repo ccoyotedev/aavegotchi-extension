@@ -3,11 +3,18 @@ import Box from 'components/Box';
 import { GotchiMain } from 'components/GotchiMain';
 import { DetailsPanel } from 'components/DetailsPanel';
 import { EmptyState } from 'components/EmptyState';
+import { GotchiSelect } from 'components/GotchiSelect';
 
 export default () => {
   const [ gotchis, setGotchis ] = useState([]);
+  const [ selectedGotchiIndex, setSelectedGotchiIndex ] = useState(0);
   const [ isConnected, setIsConnected ] = useState(false);
   const [ view, setView ] = useState('EMPTY');
+
+  const handleSelect = (index) => {
+    setSelectedGotchiIndex(index);
+    setView('MAIN');
+  }
 
   useEffect(() => {
     // Get connection status
@@ -44,13 +51,22 @@ export default () => {
       case 'MAIN':
         return (
           <GotchiMain
-            selectedGotchi={gotchis[0]}
+            selectedGotchi={gotchis[selectedGotchiIndex]}
             connected={isConnected}
-            handleShowDetails={() => setView('DETAILS')}
+            handleViewChange={setView}
           />
         )
+      case 'SELECT':
+        return (
+          <GotchiSelect gotchis={gotchis} handleSelect={handleSelect} />
+        )
       case 'DETAILS':
-        return <DetailsPanel gotchi={gotchis[0]} closePanel={() => setView('MAIN')} />
+        return (
+          <DetailsPanel
+            gotchi={gotchis[selectedGotchiIndex]}
+            closePanel={() => setView('MAIN')}
+          />
+        )
       default:
         return <EmptyState connected={isConnected} />
     }

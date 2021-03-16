@@ -58,10 +58,11 @@ const KinshipContainer = styled.div`
 export const GotchiMain = ({
   selectedGotchi,
   connected,
-  handleShowDetails,
+  handleViewChange,
 }) => {
   const [ pending, setPending ] = useState(false);
 
+  // TODO: Update state on pet
   const handlePet = () => {
     setPending(true);
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -108,14 +109,14 @@ export const GotchiMain = ({
         <NamePanel className="yellow-panel full-width">
           <PickGotchiContainer>
             <IconButton
-              onClick={handleShowDetails}
+              onClick={() => handleViewChange("SELECT")}
               icon="v"
               secondary
             />
           </PickGotchiContainer>
           <h1>{selectedGotchi?.name}</h1>
           <InfoButtonContainer>
-            <IconButton onClick={handleShowDetails} icon="i" />
+            <IconButton onClick={() => handleViewChange("DETAILS")} icon="i" />
           </InfoButtonContainer>
         </NamePanel>
         <KinshipContainer>

@@ -60,6 +60,7 @@ const useAaveContract = () => {
           lastInteracted: parseInt(gotchi['lastInteracted']),
           level: parseInt(gotchi['level']),
           rarityScore: parseInt(gotchi['modifiedRarityScore']),
+          haunt: parseInt(gotchi['hauntId']),
         }
       );
     });
