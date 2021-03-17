@@ -1,7 +1,4 @@
-import config from './config';
-
 export default {
-  ...config,
   palette: {
     pink: '#FA34F2',
     blue: '#03B6BC',

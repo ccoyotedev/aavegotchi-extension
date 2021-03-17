@@ -1,6 +1,6 @@
 {
   "version": "1.0.1",
-  "name": "react-browser-extension-boilerplate",
+  "name": "aavegotchi-extension",
   "repository": {
     "type": "git",
     "url": "https://github.com/ElForastero/react-browser-extension-boilerplate"

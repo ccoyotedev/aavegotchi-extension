@@ -140,11 +140,11 @@ export const GotchiMain = ({
         onMouseLeave={() => setDisplayTooltip(false)}
       >
         {
-          displayTooltip && (
+          displayTooltip && !connected && (
             <TooltipContainer>
               <Tooltip>
                 <h3>Not Connected!</h3>
-                <p>Please connect the current page to the matic network.</p>
+                <p>Please refresh on a page connected to the Matic network.</p>
               </Tooltip>
             </TooltipContainer>
           )
