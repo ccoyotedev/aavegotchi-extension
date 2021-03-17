@@ -21,6 +21,8 @@ const up = keyframes`
   }
 `;
 
+
+// Add bounce speed modifer
 const GotchiContainer = styled.div`
   width: 165px;
   height: 150px;
