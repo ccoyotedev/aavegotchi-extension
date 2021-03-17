@@ -27,6 +27,7 @@ const useAaveContract = () => {
   const handlePet = async (tokenId) => {
     if (account) {
       const interact = await contract?.methods.interact([tokenId]).send({ from: account });
+      updateGotchis(contract, account);
       return interact;
     }
   }
@@ -39,10 +40,15 @@ const useAaveContract = () => {
     console.log('account: ', accounts[0]);
     const aaveContract = new web3.eth.Contract(diamondAbi, aavegotchiAddress);
     setContract(aaveContract);
-    const gotchis = await aaveContract.methods.allAavegotchisOfOwner(accounts[0]).call();
-    const updatedGotchis = gotchis.map((gotchi) => {
-      const numericTraits = gotchi['modifiedNumericTraits'];
+    updateGotchis(aaveContract, accounts[0]);
+    return;
+  };
 
+  const updateGotchis = async (aaveContract, address) => {
+    const contractGotchis = await aaveContract.methods.allAavegotchisOfOwner(address).call();
+  
+    const updatedGotchis = contractGotchis.map((gotchi) => {
+      const numericTraits = gotchi['modifiedNumericTraits'];
       return (
         {
           tokenId: parseInt(gotchi['tokenId']),
@@ -64,10 +70,9 @@ const useAaveContract = () => {
         }
       );
     });
-  
     const gotchisWithSVGs = await getAllAavegotchiSVGs(updatedGotchis, aaveContract);
     setGotchis(gotchisWithSVGs);
-  };
+  }
 
   useEffect(() => {
     loadBlockchainData();

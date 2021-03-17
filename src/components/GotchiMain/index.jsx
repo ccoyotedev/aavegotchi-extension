@@ -62,7 +62,6 @@ export const GotchiMain = ({
 }) => {
   const [ pending, setPending ] = useState(false);
 
-  // TODO: Update state on pet
   const handlePet = () => {
     setPending(true);
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -75,7 +74,7 @@ export const GotchiMain = ({
           }
         },
         function(response) {
-          if (response.success) {
+          if (response?.success) {
             setPending(false);
           }
         });

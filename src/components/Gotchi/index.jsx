@@ -7,7 +7,7 @@ const down = keyframes`
   }
 
   100% {
-    transform: translateY(1.5px);
+    transform: translateY(-1.5px);
   }
 `;
 
