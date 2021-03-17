@@ -4,6 +4,17 @@ import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
 import { timeUntilNextInteraction } from 'utils/time';
+import { Tooltip } from '../Tooltip';
+
+const TooltipContainer = styled.div`
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+`
+
+const ButtonContainer = styled.div`
+  position: relative;
+`
 
 const InfoButtonContainer = styled.div`
   position: absolute;
@@ -61,6 +72,7 @@ export const GotchiMain = ({
   handleViewChange,
 }) => {
   const [ pending, setPending ] = useState(false);
+  const [ displayTooltip, setDisplayTooltip ] = useState(false);
 
   const handlePet = () => {
     setPending(true);
@@ -88,7 +100,6 @@ export const GotchiMain = ({
   //       type: "connect",
   //     },
   //     (response) => {
-  //       alert(response.success);
   //       if (response.success) {
   //         setPending(false);
   //         setIsConnected(true);
@@ -124,9 +135,27 @@ export const GotchiMain = ({
         </KinshipContainer>
       </Header>
       <Gotchi svgData={selectedGotchi?.svg} />
-      <Button onClick={handleClick} disabled={!connected || pending}>
-        Pet
-      </Button>
+      <ButtonContainer
+        onMouseEnter={() => setDisplayTooltip(true)}
+        onMouseLeave={() => setDisplayTooltip(false)}
+      >
+        {
+          displayTooltip && (
+            <TooltipContainer>
+              <Tooltip>
+                <h3>Not Connected!</h3>
+                <p>Please connect the current page to the matic network.</p>
+              </Tooltip>
+            </TooltipContainer>
+          )
+        }
+        <Button
+          onClick={handleClick}
+          disabled={!connected || pending}
+        >
+          Pet
+        </Button>
+      </ButtonContainer>
     </Container>
   )
 }

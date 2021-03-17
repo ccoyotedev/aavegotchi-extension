@@ -42,6 +42,7 @@ const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.palette.grey};
     border-bottom: 3px solid ${({ theme }) => theme.palette.pink};
     border-right: 3px solid ${({ theme }) => theme.palette.pink};
+    cursor: auto;
   }
 `
 

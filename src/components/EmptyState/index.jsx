@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'components/Button';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -27,20 +26,22 @@ export const EmptyState = ({ connected }) => {
   const renderMessage = () => {
     if (connected) {
       return (
-        <h3>Make sure you're on the Matic Network</h3>
+        <>
+          <h1>No Aavegotchis.</h1>
+          <h3>Make sure you're on the Matic Network</h3>
+        </>
       )
     }
     return (
       <>
-        <h3>Please connect to Metamask</h3>
-        <Button>Connect</Button>
+        <h1>Not Connected</h1>
+        <h3>Either connect the current page to metamask or refresh on a page already connected to metamask</h3>
       </>
     )
   }
 
   return (
     <Container>
-      <h1>No Aavegotchis.</h1>
       {renderMessage()}
     </Container>
   )
