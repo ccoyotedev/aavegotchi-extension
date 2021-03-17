@@ -27,3 +27,6 @@ Currently not possible to connect Metamask to the webpage within the popup. Inst
 
 Once contract is connected, the gotchis data is stored in Chromes storage.
 
+---
+
+Initial project was branched off of https://github.com/ElForastero/react-browser-extension-boilerplate
