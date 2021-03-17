@@ -1,5 +1,14 @@
 > This project aims to provide a simple chrome extenstion that allows you to view and pet your Aavegotchis.
 
+To view project:
+
+- Clone to local folder
+- cd to project and npm install
+- npm run build
+- Go to Chrome extenstions
+- Toggle developer mode -> Click Load unpacked
+- Locate and select build file within the project
+
 ## 🎉 Features
 
 - **View Gotchi**
