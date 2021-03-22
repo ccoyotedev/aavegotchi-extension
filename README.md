@@ -29,7 +29,7 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 
 ---
 
-## Todo
+# Todo
 
 - Enable pet only if connected to the Matic Network
 - Change panel header/border colors based on Rarity
@@ -38,7 +38,7 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 - Find way to connect webpage to Metamask directly from extension
 - Add browser compatibility for firefox
 
-# Bug fixes
+## Bug fixes
 - Last indexed Gotchi's color/pose is affecting all gotchis
 
 ---
