@@ -37,6 +37,7 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 - Have indicator that a gotchi is ready to pet (Both in injected content, and gotchi selectore screen)
 - Find way to connect webpage to Metamask directly from extension
 - Add browser compatibility for firefox
+- Pet all button
 
 ## Bug fixes
 - Last indexed Gotchi's color/pose is affecting all gotchis
