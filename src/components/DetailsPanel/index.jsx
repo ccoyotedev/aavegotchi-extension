@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
+import { getRarityColor } from 'utils/rarity';
 
 const Wrapper = styled.div`
   position: relative;
@@ -29,7 +30,7 @@ const PanelHeader = styled.div`
   display: grid;
   place-items: center;
   color: white;
-  background-color: ${({ theme }) => theme.palette.purple};
+  background-color: ${({ theme, color }) => color ? color : theme.palette.purple};
 
   h2 {
     margin: 0;
@@ -65,14 +66,17 @@ const PanelFooter = styled.div`
 `
 
 export const DetailsPanel = ({ gotchi, closePanel }) => {
-  const {
-    energy,
-    aggression,
-    spookiness,
-    brainSize,
-    eyeShape,
-    eyeColor,
-  } = gotchi?.numericTraits;
+  const { numericTraits, modifiedNumericTraits } = gotchi;
+
+  const getValue = (currentValue, modifiedValue) => {
+    if (currentValue == modifiedValue) {
+      return currentValue;
+    } else if (currentValue < modifiedValue) {
+      return `${currentValue} + ${modifiedValue - currentValue}`
+    } else {
+      return `${currentValue} - ${currentValue - modifiedValue}`
+    }
+  }
 
   return (
     <Wrapper>
@@ -80,33 +84,53 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
         <IconButton onClick={closePanel} icon="x" />
       </CloseButtonContainer>
       <Panel>
-        <PanelHeader>
-          <h2>Rarity score: {gotchi?.rarityScore}</h2>
+        <PanelHeader color={getRarityColor(gotchi?.modifiedRarityScore)}>
+          <h2>
+            Rarity score:
+            {' '}
+            {gotchi?.modifiedRarityScore}
+            {' '}
+            {gotchi?.baseRarityScore !== gotchi?.modifiedRarityScore
+              && `(${gotchi?.baseRarityScore})`
+            }
+          </h2>
         </PanelHeader>
         <DetailsContent>
           <TraitRow>
             <p className="trait">⚡️ Energy</p>
-            <p className="trait-value">({energy})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.energy, modifiedNumericTraits.energy)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👹 Aggression</p>
-            <p className="trait-value">({aggression})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.aggression, modifiedNumericTraits.aggression)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👻 Spookiness</p>
-            <p className="trait-value">({spookiness})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.spookiness, modifiedNumericTraits.spookiness)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">🧠 Brain Size</p>
-            <p className="trait-value">({brainSize})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.brainSize, modifiedNumericTraits.brainSize)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👀 Eye Shape</p>
-            <p className="trait-value">({eyeShape})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.eyeShape, modifiedNumericTraits.eyeShape)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👁 Eye Color</p>
-            <p className="trait-value">({eyeColor})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.eyeColor, modifiedNumericTraits.eyeColor)})
+            </p>
           </TraitRow>
         </DetailsContent>
         <PanelFooter />
