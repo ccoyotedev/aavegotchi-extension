@@ -32,25 +32,29 @@ const StyledButton = styled.button`
   position: relative;
   border: none;
   z-index: 1;
-  border-bottom: 4.5px solid ${({ theme }) => theme.palette.purpleAccent};
-  border-right: 4.5px solid ${({ theme }) => theme.palette.purpleAccent};
-  width: 90px;
-  height: 33px;
+  border-bottom: ${({ theme, small}) => small ? 'none' : `4.5px solid ${theme.palette.purpleAccent}`};
+  border-right: ${({ theme, small }) => small ? 'none' : `4.5px solid ${theme.palette.purpleAccent}`};
+  width: ${({small}) => small ? '72px' : '90px'};
+  height: ${({small}) => small ? '16px' : '32px'};
   cursor: pointer;
 
   &:disabled {
     background-color: ${({ theme }) => theme.palette.grey};
-    border-bottom: 3px solid ${({ theme }) => theme.palette.pink};
-    border-right: 3px solid ${({ theme }) => theme.palette.pink};
+    border-bottom: ${({ theme, small}) => small ? 'none' : `3px solid ${theme.palette.pink}`};
+    border-right: ${({ theme, small}) => small ? 'none' : `3px solid ${theme.palette.pink}`};
     cursor: auto;
   }
 `
 
-export const Button = (props) => {
+export const Button = ({ disabled, onClick, small, children }) => {
   return (
     <ButtonWrapper>
-      <StyledButton onClick={props.onClick} disabled={props.disabled}>
-        {props.children}
+      <StyledButton
+        onClick={!disabled && onClick}
+        disabled={disabled}
+        small={small}
+      >
+        {children}
       </StyledButton>
     </ButtonWrapper>
   )
