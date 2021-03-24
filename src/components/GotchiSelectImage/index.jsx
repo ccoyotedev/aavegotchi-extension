@@ -52,6 +52,7 @@ const GotchiContainer = styled.div`
     .gotchi-eyeColor,
     .gotchi-collateral,
     .gotchi-cheek,
+    .gotchi-sleeves,
     .gotchi-primary-mouth,
     .gotchi-wearable {
       animation-name: ${down};
