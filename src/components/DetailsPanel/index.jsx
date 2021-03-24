@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconButton } from '../IconButton';
+import { getRarityColor } from 'utils/rarity';
 
 const Wrapper = styled.div`
   position: relative;
@@ -29,7 +30,7 @@ const PanelHeader = styled.div`
   display: grid;
   place-items: center;
   color: white;
-  background-color: ${({ theme }) => theme.palette.purple};
+  background-color: ${({ theme, color }) => color ? color : theme.palette.purple};
 
   h2 {
     margin: 0;
@@ -83,8 +84,16 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
         <IconButton onClick={closePanel} icon="x" />
       </CloseButtonContainer>
       <Panel>
-        <PanelHeader>
-          <h2>Rarity score: {gotchi?.modifiedRarityScore} ({gotchi?.baseRarityScore})</h2>
+        <PanelHeader color={getRarityColor(gotchi?.modifiedRarityScore)}>
+          <h2>
+            Rarity score:
+            {' '}
+            {gotchi?.modifiedRarityScore}
+            {' '}
+            {gotchi?.baseRarityScore !== gotchi?.modifiedRarityScore
+              && `(${gotchi?.baseRarityScore})`
+            }
+          </h2>
         </PanelHeader>
         <DetailsContent>
           <TraitRow>

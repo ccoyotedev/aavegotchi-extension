@@ -3,6 +3,7 @@ import { Button } from 'components/Button';
 import { GotchiSelectImage } from 'components/GotchiSelectImage';
 import styled from 'styled-components';
 import { isReadyToPet } from 'utils/time';
+import { getRarityColor } from 'utils/rarity';
 
 const GotchiSelectContainer = styled.div`
   width: 100%;
@@ -22,6 +23,7 @@ const Popup = styled.div`
   padding: 16px 8px;
   text-align: center;
   opacity: ${({ active }) => active ? 1 : 0};
+  visibility: ${({ active }) => active ? 'visible' : 'hidden'};
   transition: opacity 300ms ease;
   border: 5px solid ${({ theme }) => theme.palette.yellowAccent};
 `
@@ -39,7 +41,7 @@ const GotchiContainer = styled.div`
   background-color: white;
   padding: 8px;
   padding-left: 4px;
-  border: 5px solid ${({ theme }) => theme.palette.purple};
+  border: 5px solid ${({ theme, color }) => color || theme.palette.purple};
   display: grid;
   grid-template-columns: 72px 1fr;
   gap: 8px;
@@ -113,7 +115,11 @@ export const GotchiSelect = ({ gotchis, handleSelect, connected }) => {
       </TotalContainer>
       {gotchis.map((gotchi, i) => {
         return (
-          <GotchiContainer key={i} onClick={() => handleSelect(i)}>
+          <GotchiContainer
+            key={i}
+            onClick={() => handleSelect(i)}
+            color={getRarityColor(gotchi.modifiedRarityScore)}
+          >
             <GotchiSelectImage
               readyToPet={isReadyToPet(gotchi.lastInteracted)}
               svgData={gotchi.svg}

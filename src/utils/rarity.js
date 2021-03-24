@@ -16,3 +16,18 @@ export const getRarity = (number) => {
       return 'mythical high'
   }
 }
+
+export const getRarityColor = (number) => {
+  switch (true) {
+    case (number < 450):
+      return '#7318F4';
+    case (number <= 525):
+      return '#48ABFE';
+    case (number <= 580):
+      return '#FF96FE';
+    case (number > 580):
+      return '#52FFA7';
+    default:
+      return '#7318F4';
+  }
+}
