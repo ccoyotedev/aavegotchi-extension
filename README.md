@@ -34,10 +34,9 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 - Enable pet only if connected to the Matic Network
 - Change panel header/border colors based on Rarity
 - Add Trait + Kinship score range names
-- Have indicator that a gotchi is ready to pet (Both in injected content, and gotchi selectore screen)
+- Have indicator that a gotchi is ready to be pet
 - Find way to connect webpage to Metamask directly from extension
 - Add browser compatibility for firefox
-- Pet all button
 
 ## Bug fixes
 - Last indexed Gotchi's color/pose is affecting all gotchis

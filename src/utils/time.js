@@ -1,7 +1,11 @@
-export const timeUntilNextInteraction = (epoch) => {
+const getSecondsUntilNextInteraction = (epoch) => {
   const timestampOfNextInteraction = epoch + 43200;
   const timeStampNow = Math.floor(new Date() / 1000);
-  const secondsUntilNextInteration = timestampOfNextInteraction - timeStampNow;
+  return timestampOfNextInteraction - timeStampNow;
+}
+
+export const timeUntilNextInteraction = (epoch) => {
+  const secondsUntilNextInteration = getSecondsUntilNextInteraction(epoch);
 
   if (secondsUntilNextInteration <= 0) {
     return `Pet me!`
@@ -13,4 +17,10 @@ export const timeUntilNextInteraction = (epoch) => {
   }
   const minutes = Math.ceil(secondsUntilNextInteration / 60);
   return `Next interaction: ${minutes} minutes`
+}
+
+export const isReadyToPet = (epoch) => {
+  const secondsUntilNextInteration = getSecondsUntilNextInteraction(epoch);
+
+  return secondsUntilNextInteration <= 0;
 }

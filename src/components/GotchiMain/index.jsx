@@ -82,7 +82,7 @@ export const GotchiMain = ({
         {
           type: "pet",
           data: {
-            tokenId: selectedGotchi.tokenId,
+            tokenIds: [selectedGotchi.tokenId],
           }
         },
         function(response) {

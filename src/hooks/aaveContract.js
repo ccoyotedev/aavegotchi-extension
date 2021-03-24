@@ -24,9 +24,9 @@ const useAaveContract = () => {
       }}))
   }
 
-  const handlePet = async (tokenId) => {
+  const handlePet = async (tokenIds) => {
     if (account) {
-      const interact = await contract?.methods.interact([tokenId]).send({ from: account });
+      const interact = await contract?.methods.interact(tokenIds).send({ from: account });
       updateGotchis(contract, account);
       return interact;
     }
