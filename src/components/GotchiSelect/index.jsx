@@ -121,7 +121,7 @@ export const GotchiSelect = ({ gotchis, handleSelect, connected }) => {
             <Details>
               <h2>{gotchi.name} ({gotchi.tokenId})</h2>
               <hr />
-              <p>RARITY SCORE: {gotchi.rarityScore}</p>
+              <p>RARITY SCORE: {gotchi.modifiedRarityScore}</p>
               <p>LEVEL: {gotchi.level}</p>
               <p>HAUNT: {gotchi.haunt}</p>
             </Details>

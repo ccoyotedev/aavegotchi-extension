@@ -65,14 +65,17 @@ const PanelFooter = styled.div`
 `
 
 export const DetailsPanel = ({ gotchi, closePanel }) => {
-  const {
-    energy,
-    aggression,
-    spookiness,
-    brainSize,
-    eyeShape,
-    eyeColor,
-  } = gotchi?.numericTraits;
+  const { numericTraits, modifiedNumericTraits } = gotchi;
+
+  const getValue = (currentValue, modifiedValue) => {
+    if (currentValue == modifiedValue) {
+      return currentValue;
+    } else if (currentValue < modifiedValue) {
+      return `${currentValue} + ${modifiedValue - currentValue}`
+    } else {
+      return `${currentValue} - ${currentValue - modifiedValue}`
+    }
+  }
 
   return (
     <Wrapper>
@@ -81,32 +84,44 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
       </CloseButtonContainer>
       <Panel>
         <PanelHeader>
-          <h2>Rarity score: {gotchi?.rarityScore}</h2>
+          <h2>Rarity score: {gotchi?.modifiedRarityScore} ({gotchi?.baseRarityScore})</h2>
         </PanelHeader>
         <DetailsContent>
           <TraitRow>
             <p className="trait">⚡️ Energy</p>
-            <p className="trait-value">({energy})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.energy, modifiedNumericTraits.energy)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👹 Aggression</p>
-            <p className="trait-value">({aggression})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.aggression, modifiedNumericTraits.aggression)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👻 Spookiness</p>
-            <p className="trait-value">({spookiness})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.spookiness, modifiedNumericTraits.spookiness)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">🧠 Brain Size</p>
-            <p className="trait-value">({brainSize})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.brainSize, modifiedNumericTraits.brainSize)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👀 Eye Shape</p>
-            <p className="trait-value">({eyeShape})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.eyeShape, modifiedNumericTraits.eyeShape)})
+            </p>
           </TraitRow>
           <TraitRow>
             <p className="trait">👁 Eye Color</p>
-            <p className="trait-value">({eyeColor})</p>
+            <p className="trait-value">
+              ({getValue(numericTraits.eyeColor, modifiedNumericTraits.eyeColor)})
+            </p>
           </TraitRow>
         </DetailsContent>
         <PanelFooter />
