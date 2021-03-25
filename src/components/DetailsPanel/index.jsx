@@ -16,7 +16,7 @@ const CloseButtonContainer = styled.div`
 `
 
 const Panel = styled.div`
-  border: 4.5px solid #000000;
+  border: 4px solid #000000;
   border-radius: 35px;
   background-color: white;
   width: 100%;
@@ -88,7 +88,7 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
           <h2>
             Rarity score:
             {' '}
-            {gotchi?.collateral}
+            {gotchi?.modifiedRarityScore}
             {' '}
             {gotchi?.baseRarityScore !== gotchi?.modifiedRarityScore
               && `(${gotchi?.baseRarityScore})`
