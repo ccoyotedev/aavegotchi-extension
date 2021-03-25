@@ -123,6 +123,8 @@ export const GotchiSelect = ({ gotchis, handleSelect, connected }) => {
             <GotchiSelectImage
               readyToPet={isReadyToPet(gotchi.lastInteracted)}
               svgData={gotchi.svg}
+              collateralColors={gotchi.collateralColors}
+              eyeColorScore={gotchi.numericTraits.eyeColor}
             />
             <Details>
               <h2>{gotchi.name} ({gotchi.tokenId})</h2>

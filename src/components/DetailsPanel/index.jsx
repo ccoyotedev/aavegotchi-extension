@@ -88,7 +88,7 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
           <h2>
             Rarity score:
             {' '}
-            {gotchi?.modifiedRarityScore}
+            {gotchi?.collateral}
             {' '}
             {gotchi?.baseRarityScore !== gotchi?.modifiedRarityScore
               && `(${gotchi?.baseRarityScore})`

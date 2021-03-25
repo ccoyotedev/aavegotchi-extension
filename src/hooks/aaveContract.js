@@ -15,13 +15,29 @@ const useAaveContract = () => {
     return svg;
   };
 
+  const getAavegotchiCollaterals = async (contract) => {
+    const collateral = await contract?.methods.getCollateralInfo().call();
+    return collateral;
+  };
+
   const getAllAavegotchiSVGs = async (gotchis, contract) => {
+    const collaterals = await getAavegotchiCollaterals(contract);
     return Promise.all(gotchis.map(async gotchi => {
       const svg = await getAavegotchiSVG(gotchi.tokenId, contract);
+      const collateral = collaterals.find(item => item["collateralType"] === gotchi.collateralAddress);
+      const collateralInfo = collateral["collateralTypeInfo"];
+      const collateralColors = {
+        cheekColor: collateralInfo["cheekColor"],
+        primaryColor: collateralInfo["primaryColor"],
+        secondaryColor: collateralInfo["secondaryColor"],
+      }
+
       return {
         ...gotchi,
         svg,
-      }}))
+        collateralColors,
+      }
+    }))
   }
 
   const handlePet = async (tokenIds) => {
@@ -77,6 +93,7 @@ const useAaveContract = () => {
           modifiedRarityScore: parseInt(gotchi['modifiedRarityScore']),
           baseRarityScore: parseInt(gotchi['baseRarityScore']),
           haunt: parseInt(gotchi['hauntId']),
+          collateralAddress: gotchi['collateral'],
         }
       );
     });
