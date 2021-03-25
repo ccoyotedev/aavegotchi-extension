@@ -15,6 +15,8 @@ chrome.runtime.onMessage.addListener((message) => {
     if (res.gotchis.some(gotchi => isReadyToPet(gotchi.lastInteracted))) {
       chrome.browserAction.setBadgeBackgroundColor({color:"rgb(115, 24, 244)"});
       chrome.browserAction.setBadgeText({text: '❤'});
+    } else {
+      chrome.browserAction.setBadgeText({text: ''});
     }
   });
 });
