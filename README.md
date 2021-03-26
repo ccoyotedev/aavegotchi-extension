@@ -37,6 +37,11 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 - Add browser compatibility for firefox
 - Add browser compatibility for brave
 
+## Env improvements
+
+- Replace with Typescript
+- Repace web3 with Ether
+
 
 ---
 
