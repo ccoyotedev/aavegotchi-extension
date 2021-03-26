@@ -17,8 +17,8 @@ document.body.appendChild(root);
 const App = () => {
   const { gotchis, handlePet, account } = useAaveContract();
 
-  const sendHandlePet = async (tokenId) => {
-    const res = await handlePet(tokenId)
+  const sendHandlePet = async (tokenIds) => {
+    const res = await handlePet(tokenIds)
     console.log(res);
     return res;
   }
@@ -26,7 +26,7 @@ const App = () => {
   const listener = (message, sender, sendResponse) => {
     switch(message.type) {
       case "pet":
-        sendHandlePet(message.data.tokenId).then(() => {
+        sendHandlePet(message.data.tokenIds).then(() => {
           sendResponse({ success: true });
         })
         break;

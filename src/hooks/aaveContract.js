@@ -15,18 +15,34 @@ const useAaveContract = () => {
     return svg;
   };
 
+  const getAavegotchiCollaterals = async (contract) => {
+    const collateral = await contract?.methods.getCollateralInfo().call();
+    return collateral;
+  };
+
   const getAllAavegotchiSVGs = async (gotchis, contract) => {
+    const collaterals = await getAavegotchiCollaterals(contract);
     return Promise.all(gotchis.map(async gotchi => {
       const svg = await getAavegotchiSVG(gotchi.tokenId, contract);
+      const collateral = collaterals.find(item => item["collateralType"] === gotchi.collateralAddress);
+      const collateralInfo = collateral["collateralTypeInfo"];
+      const collateralColors = {
+        cheekColor: collateralInfo["cheekColor"],
+        primaryColor: collateralInfo["primaryColor"],
+        secondaryColor: collateralInfo["secondaryColor"],
+      }
+
       return {
         ...gotchi,
         svg,
-      }}))
+        collateralColors,
+      }
+    }))
   }
 
-  const handlePet = async (tokenId) => {
+  const handlePet = async (tokenIds) => {
     if (account) {
-      const interact = await contract?.methods.interact([tokenId]).send({ from: account });
+      const interact = await contract?.methods.interact(tokenIds).send({ from: account });
       updateGotchis(contract, account);
       return interact;
     }
@@ -48,7 +64,8 @@ const useAaveContract = () => {
     const contractGotchis = await aaveContract.methods.allAavegotchisOfOwner(address).call();
   
     const updatedGotchis = contractGotchis.map((gotchi) => {
-      const numericTraits = gotchi['modifiedNumericTraits'];
+      const modifiedNumericTraits = gotchi['modifiedNumericTraits'];
+      const numericTraits = gotchi['numericTraits'];
       return (
         {
           tokenId: parseInt(gotchi['tokenId']),
@@ -62,11 +79,21 @@ const useAaveContract = () => {
             eyeShape: parseInt(numericTraits[4]),
             eyeColor: parseInt(numericTraits[5]),
           },
+          modifiedNumericTraits: {
+            energy: parseInt(modifiedNumericTraits[0]),
+            aggression: parseInt(modifiedNumericTraits[1]),
+            spookiness: parseInt(modifiedNumericTraits[2]),
+            brainSize: parseInt(modifiedNumericTraits[3]),
+            eyeShape: parseInt(modifiedNumericTraits[4]),
+            eyeColor: parseInt(modifiedNumericTraits[5]),
+          },
           kinship: parseInt(gotchi['kinship']),
           lastInteracted: parseInt(gotchi['lastInteracted']),
           level: parseInt(gotchi['level']),
-          rarityScore: parseInt(gotchi['modifiedRarityScore']),
+          modifiedRarityScore: parseInt(gotchi['modifiedRarityScore']),
+          baseRarityScore: parseInt(gotchi['baseRarityScore']),
           haunt: parseInt(gotchi['hauntId']),
+          collateralAddress: gotchi['collateral'],
         }
       );
     });

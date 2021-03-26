@@ -1,18 +1,33 @@
-export const getRarity = (number) => {
+export const getEyeColor = (number, collateralColor) => {
   switch (true) {
     case (number <= 1):
-      return 'mythical low'
+      return '#FF02FF'
     case (number > 1 && number <= 9):
-      return 'rare low'
+      return '#0164FF'
     case (number > 9 && number <= 24):
-      return 'uncommon low'
+      return '#5D24BF'
     case (number > 24 && number <= 74):
-      return 'common'
+      return collateralColor
     case (number > 74 && number <= 90):
-      return 'uncommon high'
+      return '#36818E'
     case (number > 90 && number <= 97):
-      return 'rare high'
+      return '#EA8B27'
     case (number > 97):
-      return 'mythical high'
+      return '#52FFA7'
+  }
+}
+
+export const getRarityColor = (number) => {
+  switch (true) {
+    case (number < 450):
+      return '#7318F4';
+    case (number <= 525):
+      return '#48ABFE';
+    case (number <= 580):
+      return '#FF96FE';
+    case (number > 580):
+      return '#52FFA7';
+    default:
+      return '#7318F4';
   }
 }

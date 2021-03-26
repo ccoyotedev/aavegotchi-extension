@@ -58,7 +58,11 @@ export default () => {
         )
       case 'SELECT':
         return (
-          <GotchiSelect gotchis={gotchis} handleSelect={handleSelect} />
+          <GotchiSelect
+            gotchis={gotchis}
+            handleSelect={handleSelect}
+            connected={isConnected}
+          />
         )
       case 'DETAILS':
         return (
