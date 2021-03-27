@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { DownChevron } from '../DownChevron';
 import { timeUntilNextInteraction } from 'utils/time';
 import { Tooltip } from '../Tooltip';
+import { getKinshipText } from 'utils/kinship';
 
 const TooltipContainer = styled.div`
   position: absolute;
@@ -134,7 +135,7 @@ export const GotchiMain = ({
           </InfoButtonContainer>
         </NamePanel>
         <KinshipContainer>
-          <h2>KINSHIP: ({selectedGotchi?.kinship})</h2>
+          <h2>KINSHIP: {getKinshipText(selectedGotchi.kinship)} ({selectedGotchi?.kinship})</h2>
           <p>{timeUntilNextInteraction(selectedGotchi?.lastInteracted)}</p>
         </KinshipContainer>
       </Header>
