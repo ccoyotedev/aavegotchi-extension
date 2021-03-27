@@ -44,6 +44,17 @@ const StyledButton = styled.button`
     border-right: ${({ theme, small}) => small ? 'none' : `3px solid ${theme.palette.pink}`};
     cursor: auto;
   }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    border-bottom: none;
+    border-right: none;
+    border-top: ${({ theme, small}) => small ? `2px solid ${theme.palette.purpleAccent}` : `4.5px solid ${theme.palette.purpleAccent}`};
+    border-left: ${({ theme, small }) => small ? `2px solid ${theme.palette.purpleAccent}` : `4.5px solid ${theme.palette.purpleAccent}`};
+  }
 `
 
 export const Button = ({ disabled, onClick, small, children }) => {

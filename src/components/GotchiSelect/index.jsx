@@ -39,14 +39,24 @@ const TotalContainer = styled.div`
 const GotchiContainer = styled.div`
   width: 100%;
   background-color: white;
-  padding: 8px;
-  padding-left: 4px;
   border: 5px solid ${({ theme, color }) => color || theme.palette.purple};
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 8px;
   cursor: pointer;
   margin-bottom: 8px;
+`
+
+const ClickShadow = styled.div`
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  padding: 8px;
+  padding-left: 4px;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  &:active {
+    border-top: 3px solid ${({ theme }) => theme.palette.grey};
+    border-left: 3px solid ${({ theme }) => theme.palette.grey};
+    padding-bottom: 5px;
+  }
 `
 
 const Details = styled.div`
@@ -120,19 +130,21 @@ export const GotchiSelect = ({ gotchis, handleSelect, connected }) => {
             onClick={() => handleSelect(i)}
             color={getRarityColor(gotchi.modifiedRarityScore)}
           >
-            <GotchiSelectImage
-              readyToPet={isReadyToPet(gotchi.lastInteracted)}
-              svgData={gotchi.svg}
-              collateralColors={gotchi.collateralColors}
-              eyeColorScore={gotchi.numericTraits.eyeColor}
-            />
-            <Details>
-              <h2>{gotchi.name} ({gotchi.tokenId})</h2>
-              <hr />
-              <p>RARITY SCORE: {gotchi.modifiedRarityScore}</p>
-              <p>LEVEL: {gotchi.level}</p>
-              <p>HAUNT: {gotchi.haunt}</p>
-            </Details>
+            <ClickShadow>
+              <GotchiSelectImage
+                readyToPet={isReadyToPet(gotchi.lastInteracted)}
+                svgData={gotchi.svg}
+                collateralColors={gotchi.collateralColors}
+                eyeColorScore={gotchi.numericTraits.eyeColor}
+              />
+              <Details>
+                <h2>{gotchi.name} ({gotchi.tokenId})</h2>
+                <hr />
+                <p>RARITY SCORE: {gotchi.modifiedRarityScore}</p>
+                <p>LEVEL: {gotchi.level}</p>
+                <p>HAUNT: {gotchi.haunt}</p>
+              </Details>
+            </ClickShadow>
           </GotchiContainer>
         )
       })}

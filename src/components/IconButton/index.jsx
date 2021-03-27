@@ -42,13 +42,23 @@ const Button = styled.button`
   z-index: 1;
   cursor: pointer;
   padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+    border-top: ${({ theme, secondary}) => secondary ? `2px solid ${theme.palette.yellowAccent}` : `2px solid ${theme.palette.pinkAccent}`};
+    border-left: ${({ theme, secondary }) => secondary ? `2px solid ${theme.palette.yellowAccent}` : `2px solid ${theme.palette.pinkAccent}`};
+  }
 `
 
 export const IconButton = (props) => {
   return (
     <ButtonWrapper secondary={props.secondary}>
       <Button onClick={props.onClick} secondary={props.secondary}>
-        {props.icon}
+        {props.children}
       </Button>
     </ButtonWrapper>
   )

@@ -3,6 +3,7 @@ import { IconButton } from 'components/IconButton';
 import styled from 'styled-components';
 import { Gotchi } from '../Gotchi';
 import { Button } from '../Button';
+import { DownChevron } from '../DownChevron';
 import { timeUntilNextInteraction } from 'utils/time';
 import { Tooltip } from '../Tooltip';
 
@@ -120,13 +121,16 @@ export const GotchiMain = ({
           <PickGotchiContainer>
             <IconButton
               onClick={() => handleViewChange("SELECT")}
-              icon="v"
               secondary
-            />
+            >
+              <DownChevron />
+            </IconButton>
           </PickGotchiContainer>
           <h1>{selectedGotchi?.name}</h1>
           <InfoButtonContainer>
-            <IconButton onClick={() => handleViewChange("DETAILS")} icon="i" />
+            <IconButton onClick={() => handleViewChange("DETAILS")}>
+              i
+            </IconButton>
           </InfoButtonContainer>
         </NamePanel>
         <KinshipContainer>

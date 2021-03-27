@@ -81,7 +81,7 @@ export const DetailsPanel = ({ gotchi, closePanel }) => {
   return (
     <Wrapper>
       <CloseButtonContainer>
-        <IconButton onClick={closePanel} icon="x" />
+        <IconButton onClick={closePanel}>x</IconButton>
       </CloseButtonContainer>
       <Panel>
         <PanelHeader color={getRarityColor(gotchi?.modifiedRarityScore)}>
