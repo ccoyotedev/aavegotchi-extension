@@ -32,10 +32,10 @@ Once contract is connected, the gotchis data is stored in Chromes storage.
 # Todo
 
 - Enable pet only if connected to the Matic Network
-- Kinship score range names
 - Find way to connect webpage to Metamask directly from extension
 - Add browser compatibility for firefox
 - Add browser compatibility for brave
+- Add proper error handling with error codes
 
 ## Env improvements
 
